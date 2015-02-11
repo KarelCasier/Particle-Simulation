@@ -4,7 +4,7 @@
 
 Particle::Particle() :
 mPosition(sf::Vector2f(0,0)),
-mMass(100)
+mMass(10)
 {
 }
 
@@ -26,7 +26,7 @@ void Particle::update(const sf::Time& dt)
 
 sf::Vector2f Particle::getTotalForce() const
 {
-	sf::Vector2f totalForce;
+	sf::Vector2f totalForce(0,0);
 
 	for (const sf::Vector2f & force : mForces)
 	{

@@ -12,7 +12,7 @@ mVerticies(sf::Points, particleCount)	///< Initiate Vertex Array to hold a certa
 		for (int j = 0; j < std::sqrt(particleCount); j++)
 		{
 			Particle newParticle;
-			newParticle.setPosition(sf::Vector2f(i*10, j) - sf::Vector2f(20,20));
+			newParticle.setPosition(sf::Vector2f(i*2, j*2) - sf::Vector2f(20,20));
 			mParticles.push_back(newParticle);
 		}
 	}
@@ -32,10 +32,10 @@ void ParticleSystem::update(sf::Time& dt)
 		//pParticle.decreaseLife(dt);		///< Update lifetime of particle
 		if (mouseClicked)
 		{
-			pParticle.addForce((mousePosition - pParticle.getPosition())* (float)(100000) / ( std::pow(Distance(mousePosition, pParticle.getPosition()) + 5, 2)) );
+			pParticle.addForce((mousePosition - pParticle.getPosition())* (float)(500000) / ( std::pow(Distance(mousePosition, pParticle.getPosition()) + 10, 2)) );
 			//pParticle.addForce((mousePosition - pParticle.getPosition()) * (float)(500000 / std::pow(Distance(mousePosition, pParticle.getPosition()) + 5, 2)));		///< Add force proportional to the inverse of the distance from mouse
 		}
-		pParticle.addForce(- pParticle.getVelocity() * (float)50);	///< Add a drag force proportional to the velocity of the particle
+		pParticle.addForce(- pParticle.getVelocity() * (float)10);	///< Add a drag force proportional to the velocity of the particle
 
 		pParticle.update(dt);										///< Update particle position
 
