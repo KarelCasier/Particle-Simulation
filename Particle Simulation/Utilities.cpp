@@ -39,3 +39,24 @@ float Distance(const sf::Vector2f& v1, const sf::Vector2f& v2)
 {
 	return std::sqrt(std::pow((v2.x - v1.x), 2) + std::pow((v2.y - v1.y), 2));
 }
+
+float lerp(const float & a, const float & b, const float & t)
+{
+	return (1 - t)*a + t*b;
+}
+
+float lerpFast(const float & a, const float & b, const float & t) {
+	return a + t*(b - a);
+}
+
+float clamp(const float& value, const float& min, const float& max)
+{
+	float result;
+	if (value > max)
+		result = max;
+	else if (value < min)
+		result = min;
+	else
+		result = value;
+	return result;
+}

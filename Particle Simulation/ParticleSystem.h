@@ -16,5 +16,5 @@ private:
 private:
 	std::vector<Particle>	mParticles;			///< Vector of Particles the system is holding
 	sf::VertexArray			mVerticies;			///< Vertex array to hold sf::Points
-	sf::Time				mParticleLifetime;	///< Time particle will live for
+	//sf::Time				mParticleLifetime;	///< Time particle will live for
 };

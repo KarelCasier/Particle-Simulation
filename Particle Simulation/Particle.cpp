@@ -22,6 +22,8 @@ void Particle::update(const sf::Time& dt)
 	sf::Vector2f prevPosition = mPosition;
 	mPosition += mVelocity*dt.asSeconds() + 0.5f*getTotalForce() / mMass*(float)std::pow(dt.asSeconds(), 2); //Kinematic equation to move position
 	mVelocity = (mPosition - prevPosition) / dt.asSeconds(); //derivative to get new velocity
+
+
 }
 
 sf::Vector2f Particle::getTotalForce() const
@@ -32,7 +34,7 @@ sf::Vector2f Particle::getTotalForce() const
 	{
 		totalForce += force;
 	}
-	return totalForce;;
+	return totalForce;
 }
 
 std::vector<sf::Vector2f> Particle::getForces() const

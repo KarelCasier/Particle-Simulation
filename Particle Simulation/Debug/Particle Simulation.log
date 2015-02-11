@@ -1,8 +1,11 @@
-﻿Build started 2/10/2015 10:58:48 PM.
+﻿Build started 2/11/2015 11:24:15 AM.
      1>Project "Z:\Github\Particle Simulation\Particle Simulation\Particle Simulation.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
-         Game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ParticleSystem.cpp
+         ParticleSystem.cpp
+     1>z:\github\particle simulation\particle simulation\particlesystem.cpp(10): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>z:\github\particle simulation\particle simulation\particlesystem.cpp(17): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>z:\github\particle simulation\particle simulation\particlesystem.cpp(46): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\Github\Particle Simulation\Debug\Particle Simulation.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML\SFML-2.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" opengl32.lib winmm.lib gdi32.lib glew.lib freetype.lib jpeg.lib openal32.lib sndfile.lib ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\Github\Particle Simulation\Debug\Particle Simulation.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\Github\Particle Simulation\Debug\Particle Simulation.lib" /MACHINE:X86 Debug\Game.obj
          Debug\main.obj
@@ -14,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.95
+Time Elapsed 01:05:23.74

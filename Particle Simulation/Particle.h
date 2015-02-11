@@ -20,19 +20,19 @@ public:
 	const sf::Vector2f&			getPosition() { return mPosition; }
 
 	void						setVelocity(sf::Vector2f& vel) { mVelocity = vel; }
-	sf::Vector2f				getVelocity() { return mVelocity; }
+	const sf::Vector2f &		getVelocity() { return mVelocity; }
 
-	void						decreaseLife(sf::Time& time) { mLifetime -= time; }
-	const sf::Time &			getLifetime() { return mLifetime; }
+	//void						decreaseLife(sf::Time& time) { mLifetime -= time; }
+	//const sf::Time &			getLifetime() { return mLifetime; }
 
 private:
 	sf::Vector2f				mVelocity;
 	sf::Vector2f				mPosition;
 	sf::Vector2f				mAcceleration;
 	float						mMass;
-	sf::Time					mLifetime;
+	//sf::Time					mLifetime;
 
-	std::vector<sf::Vector2f>	mForces;
+	std::vector<sf::Vector2f>	mForces;;
 
 };
 

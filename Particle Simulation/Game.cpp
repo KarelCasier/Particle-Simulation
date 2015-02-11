@@ -17,7 +17,7 @@ Game::Game()
 , mWorldView(sf::Vector2f(0.f,0.f), sf::Vector2f(1000, 1000))
 , mUIView(sf::Vector2f(500, 500), sf::Vector2f(1000, 1000))
 , camPos(0, 0)
-, mParticleSystem(2500)
+, mParticleSystem(160000)
 {
 		//mWindow.setKeyRepeatEnabled(false);
 
