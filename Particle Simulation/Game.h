@@ -27,6 +27,7 @@ public:
 	sf::RenderWindow*		getWindow() { return &mWindow; }
 	sf::View*				getWorldView() { return &mWorldView; }
 
+
 	bool					getMouseButtonState(sf::Mouse::Button button) { return sf::Mouse::isButtonPressed(button); }
 	sf::Vector2f			getMousePosition() { return mWindow.mapPixelToCoords((sf::Mouse::getPosition(mWindow))); }
 
@@ -54,7 +55,12 @@ private:
 	sf::View				mWorldView;
 
 	sf::Vector2f			camPos;
-	ParticleSystem			mParticleSystem;;
+	ParticleSystem			mParticleSystem;
+
+	bool					bWindowInFocus;
+
+	sf::Clock				effectorPlacementTimer;			///<	Timer for placing effectors
+	sf::Time				effectorPlacementCooldown;		///<	Cool-down for placing effectors
 };
 
 typedef Game TheGame;
