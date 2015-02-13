@@ -55,12 +55,17 @@ private:
 	sf::View				mWorldView;
 
 	sf::Vector2f			camPos;
-	ParticleSystem			mParticleSystem;
+	ParticleSystem*			mParticleSystem;
 
 	bool					bWindowInFocus;
 
-	sf::Clock				effectorPlacementTimer;			///<	Timer for placing effectors
-	sf::Time				effectorPlacementCooldown;		///<	Cool-down for placing effectors
+	sf::Clock				buttonTimer;					///<	Timer for pressing buttons
+	sf::Time				buttonCooldown;					///<	Cool-down for pressing buttons
+
+	bool					bDirectInteraction;				///<	Direct interaction vs placing effectors
+
+	std::vector<int>		particleNumberOptions;
+	int						particleNumberSelector;
 };
 
 typedef Game TheGame;

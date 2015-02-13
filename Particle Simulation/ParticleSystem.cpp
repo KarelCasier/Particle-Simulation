@@ -11,9 +11,12 @@ mParticles(),
 mVerticies(sf::Points, particleCount),	///< Initiate Vertex Array to hold a certain amount if sf::Points
 winX(width),
 winY(height),
-mParticleCount(particleCount)
+mParticleCount(particleCount),
+bIsDirectlyInteracting(true),
+bIsWrappingParticlesOnScreen(true),
+bParticleDrag(false)
 {
-	float spacing = 2.0;
+	float spacing = 1.0;
 	int sqrtParticles = std::sqrt(mParticleCount);
 
 	for (int i = 0; i < sqrtParticles; i++)
@@ -38,29 +41,31 @@ void ParticleSystem::update(sf::Time& dt)
 	{
 		Particle& pParticle = mParticles.at(i);
 
-		/*
+		
 		//pParticle.decreaseLife(dt);								///< Update lifetime of particle
-		if (mouseClicked)// && Distance(mousePosition, pParticle.getPosition()) > 10)
+		if (bIsDirectlyInteracting)									///< Only do mouse interactions if enabled
 		{
-			///<-------------------------------------For more realistic but more chaotic physics---------------------------------
-			//sf::Vector2f DirVec = ((mousePosition - pParticle.getPosition()) / Norm(mousePosition - pParticle.getPosition()));
-			//pParticle.addForce(DirVec * (float)GRAVMASSCONST / std::powf(Distance(mousePosition, pParticle.getPosition()), 2));
-			///<-----------------------------------------------------------------------------------------------------------------
+			if (mouseClicked)// && Distance(mousePosition, pParticle.getPosition()) > 10)
+			{
+				///<-------------------------------------For more realistic but more chaotic physics---------------------------------
+				//sf::Vector2f DirVec = ((mousePosition - pParticle.getPosition()) / Norm(mousePosition - pParticle.getPosition()));
+				//pParticle.addForce(DirVec * (float)GRAVMASSCONST / std::powf(Distance(mousePosition, pParticle.getPosition()), 2));
+				///<-----------------------------------------------------------------------------------------------------------------
 
 
-																	///< Add force proportional to the inverse of the distance from mouse
-			pParticle.addForce((mousePosition - pParticle.getPosition())* (float)(500000) / ( std::pow(Distance(mousePosition, pParticle.getPosition()) + 10, 2)) );
+				///< Add force proportional to the inverse of the distance from mouse
+				pParticle.addForce((mousePosition - pParticle.getPosition())* (float)(500000) / (std::pow(Distance(mousePosition, pParticle.getPosition()) + 10, 2)));
+			}
+			else if (mouseClickedRight)
+			{
+				///<-------------------------------------For more realistic but more chaotic physics---------------------------------
+				//sf::Vector2f DirVec = -((mousePosition - pParticle.getPosition()) / Norm(mousePosition - pParticle.getPosition()));
+				//pParticle.addForce(DirVec * (float)GRAVMASSCONST / std::powf(Distance(mousePosition, pParticle.getPosition()), 2));
+				///<-----------------------------------------------------------------------------------------------------------------
+
+				pParticle.addForce((pParticle.getPosition() - mousePosition)* (float)(500000) / (std::pow(Distance(mousePosition, pParticle.getPosition()) + 10, 2)));
+			}
 		}
-		else if (mouseClickedRight)
-		{
-			///<-------------------------------------For more realistic but more chaotic physics---------------------------------
-			//sf::Vector2f DirVec = -((mousePosition - pParticle.getPosition()) / Norm(mousePosition - pParticle.getPosition()));
-			//pParticle.addForce(DirVec * (float)GRAVMASSCONST / std::powf(Distance(mousePosition, pParticle.getPosition()), 2));
-			///<-----------------------------------------------------------------------------------------------------------------
-
-			pParticle.addForce((pParticle.getPosition() - mousePosition)* (float)(500000) / (std::pow(Distance(mousePosition, pParticle.getPosition()) + 10, 2)));
-		}
-		*/
 
 		//<-----				Add forces from effectors
 		for (const Effector& effector : mEffectors)
@@ -68,10 +73,10 @@ void ParticleSystem::update(sf::Time& dt)
 			switch (effector.type)
 			{
 			case EffectorType::GRAVITYWELL:
-				pParticle.addForce((effector.position - pParticle.getPosition())* (float)(effector.strength) / (std::pow(1+ Distance(effector.position, pParticle.getPosition()) + 10, 2)));
+				pParticle.addForce((effector.position - pParticle.getPosition())* (float)(effector.strength) / (std::powf(Distance(effector.position, pParticle.getPosition()) + 10, 2)));
 				break;
 			case EffectorType::REPULSOR:
-				pParticle.addForce(-(effector.position - pParticle.getPosition())* (float)(effector.strength) / (std::pow(Distance(effector.position, pParticle.getPosition()) + 10, 2)));
+				pParticle.addForce(-(effector.position - pParticle.getPosition())* (float)(effector.strength) / (std::powf(Distance(effector.position, pParticle.getPosition()) + 10, 2)));
 				break;
 			default:
 				std::cout << "Unknown EffectorType" << std::endl;
@@ -80,33 +85,37 @@ void ParticleSystem::update(sf::Time& dt)
 		}
 		//<-------------------------------------------------------------------
 
-		//pParticle.addForce(- pParticle.getVelocity() * (float)10);				///< Add a drag force proportional to the velocity of the particle
+		if (bParticleDrag)
+		{
+			pParticle.addForce(-pParticle.getVelocity() * (float)10);				///< Add a drag force proportional to the velocity of the particle
+		}
 
 		pParticle.update(dt);													///< Update particle position
 
 		//<--------------------Wrap particles on screen-----------------------
-		/*
-		sf::Vector2f pPos = pParticle.getPosition();
-		sf::Vector2f winPos = TheGame::Instance()->getWorldView()->getCenter();
+		if (bIsWrappingParticlesOnScreen)
+		{
+			sf::Vector2f pPos = pParticle.getPosition();
+			sf::Vector2f winPos = TheGame::Instance()->getWorldView()->getCenter();
 
-		if (pPos.x < winPos.x - (winX / 2.0))
-		{
-			pParticle.setPosition(sf::Vector2f(winPos.x + winX/2.0, pPos.y));
-		}
-		else if (pPos.x > winPos.x + (winX / 2.0))
-		{
-			pParticle.setPosition(sf::Vector2f(winPos.x - winX / 2.0, pPos.y));
-		}
+			if (pPos.x < winPos.x - (winX / 2.0))
+			{
+				pParticle.setPosition(sf::Vector2f(winPos.x + winX / 2.0, pPos.y));
+			}
+			else if (pPos.x > winPos.x + (winX / 2.0))
+			{
+				pParticle.setPosition(sf::Vector2f(winPos.x - winX / 2.0, pPos.y));
+			}
 
-		if (pPos.y < winPos.y - (winY / 2.0))
-		{
-			pParticle.setPosition(sf::Vector2f(pPos.x, winPos.y + winY / 2.0));
+			if (pPos.y < winPos.y - (winY / 2.0))
+			{
+				pParticle.setPosition(sf::Vector2f(pPos.x, winPos.y + winY / 2.0));
+			}
+			else if (pPos.y > winPos.y + (winY / 2.0))
+			{
+				pParticle.setPosition(sf::Vector2f(pPos.x, winPos.y - winY / 2.0));
+			}
 		}
-		else if (pPos.y > winPos.y + (winY / 2.0))
-		{
-			pParticle.setPosition(sf::Vector2f(pPos.x, winPos.y - winY / 2.0));
-		}
-		*/
 		///<-------------------------------------------------------------------
 
 		mVerticies[i].position = pParticle.getPosition();			///< Change vertex position to the particle position
@@ -144,7 +153,7 @@ void ParticleSystem::addEffector(const EffectorType& type, const sf::Vector2f& p
 
 void ParticleSystem::resetParticles()
 {
-	float spacing = 3;
+	float spacing = 1;
 	int sqrtParticles = std::sqrt(mParticleCount);
 
 	for (int i = 0; i < mParticles.size(); i++)

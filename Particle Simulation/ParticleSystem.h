@@ -26,6 +26,10 @@ public:
 
 	void					resetParticles();
 
+	void					setDirectInteractionState(const bool& state) { bIsDirectlyInteracting = state; }
+	void					toggleParticleWrapping() { bIsWrappingParticlesOnScreen = !bIsWrappingParticlesOnScreen; }
+	void					toggleParticleDrag() { bParticleDrag = !bParticleDrag; }
+
 private:
 	virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -43,4 +47,8 @@ private:
 	//static const float GRAVMASSCONST;
 
 	std::vector<Effector>	mEffectors;
+
+	bool					bIsDirectlyInteracting;
+	bool					bIsWrappingParticlesOnScreen;
+	bool					bParticleDrag;
 };

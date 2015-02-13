@@ -1,11 +1,9 @@
-﻿Build started 2/11/2015 1:03:00 PM.
+﻿Build started 2/12/2015 7:11:58 PM.
      1>Project "Z:\Github\Particle Simulation\Particle Simulation\Particle Simulation.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ParticleSystem.cpp
-         ParticleSystem.cpp
-     1>ParticleSystem.cpp(10): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>ParticleSystem.cpp(17): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>ParticleSystem.cpp(46): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML\SFML-2.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
+     1>Game.cpp(172): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\Github\Particle Simulation\Release\Particle Simulation.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\SFML\SFML-2.2\lib" "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" "sfml-audio.lib" opengl32.lib winmm.lib gdi32.lib glew.lib freetype.lib jpeg.lib openal32.lib sndfile.lib ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\Github\Particle Simulation\Release\Particle Simulation.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\Github\Particle Simulation\Release\Particle Simulation.lib" /MACHINE:X86 /SAFESEH Release\Game.obj
          Release\main.obj
@@ -19,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.05
+Time Elapsed 00:00:01.94
